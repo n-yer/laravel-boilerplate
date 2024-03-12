@@ -1,4 +1,4 @@
-<x-forms.patch :action="route('frontend.user.profile.update')">
+<x-forms.patch :action="route('frontend.user.profile.update')" enctype="multipart/form-data">
     <div class="form-group row">
         <label for="name" class="col-md-3 col-form-label text-md-right">@lang('Name')</label>
 
@@ -20,6 +20,14 @@
             </div>
         </div><!--form-group-->
     @endif
+
+    <div class="form-group row">
+        <label for="image" class="col-md-3 col-form-label text-md-right">@lang('Profile Picture')</label>
+
+        <div class="col-md-9">
+            <input type="file" name="image" class="form-control-file">
+        </div>
+    </div><!--form-group-->
 
     <div class="form-group row mb-0">
         <div class="col-md-12 text-right">
