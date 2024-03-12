@@ -29,7 +29,40 @@ class UserService extends BaseService
     {
         $this->model = $user;
     }
+    /**
+     * Get count of all users.
+     *
+     * @return int
+     */
+    public function getCount(): int
+    {
+        return $this->model->count();
+    }
 
+    /**
+     * Get count of users by type.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getCountByType()
+    {
+        return $this->model->select('type', DB::raw('count(*) as total'))
+            ->groupBy('type')
+            ->pluck('total', 'type');
+    }
+
+    /**
+     * Get count of users registered by date.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getUsersByDate()
+    {
+        return $this->model->select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(*) as total'))
+            ->groupBy('date')
+            ->get()
+            ->pluck('total', 'date');
+    }
     /**
      * @param $type
      * @param  bool|int  $perPage
@@ -316,7 +349,7 @@ class UserService extends BaseService
     /**
      * @param  array  $data
      * @return User
-     */
+    */
     protected function createUser(array $data = []): User
     {
         return $this->model::create([

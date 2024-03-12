@@ -180,6 +180,8 @@ return [
         App\Providers\ObserverServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
+
     ],
 
     /*
@@ -235,5 +237,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+    'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
 
 ];
